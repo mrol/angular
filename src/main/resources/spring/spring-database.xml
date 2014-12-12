@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee.xsd   http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+    <jee:jndi-lookup id="dataSource"
+                     jndi-name="jdbc/ccc7"
+                     lookup-on-startup="false"
+                     resource-ref="true"
+                     proxy-interface="javax.sql.DataSource"/>
+
+    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <!-- Hibernate session factory -->
+    <bean id="sessionFactory"
+          class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+
+        <property name="configLocation" value="classpath:/hibernate.cfg.xml"/>
+
+        <property name="hibernateProperties">
+            <value>
+                hibernate.id.new_generator_mappings=true
+                hibernate.bytecode.use_reflection_optimizer=false
+                hibernate.dialect=org.hibernate.dialect.Oracle10gDialect
+                hibernate.show_sql=true
+                <!--hibernate.format_sql=true-->
+                <!--hibernate.use_sql_comments=true-->
+                hibernate.default_schema=MNK
+                hibernate.hbm2ddl.auto=validate
+                hibernate.temp.use_jdbc_metadata_defaults=false
+                hibernate.current_session_context_class=org.hibernate.context.ThreadLocalSessionContext
+            </value>
+        </property>
+    </bean>
+
+    <!--<bean id="userDao" class="com.mkyong.users.dao.UserDaoImpl">-->
+    <!--<property name="sessionFactory" ref="sessionFactory" />-->
+    <!--</bean>-->
+
+    <!--<bean id="myUserDetailsService"-->
+    <!--class="com.mkyong.users.service.MyUserDetailsService">-->
+    <!--<property name="userDao" ref="userDao" />-->
+    <!--</bean>-->
+
+    <!-- MUST have transaction manager, using aop and aspects  -->
+    <bean id="transactionManager"
+          class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <tx:advice id="txAdvice" transaction-manager="transactionManager">
+        <tx:attributes>
+            <tx:method name="get*" read-only="true"/>
+            <tx:method name="find*" read-only="true"/>
+            <tx:method name="*"/>
+        </tx:attributes>
+    </tx:advice>
+
+    <!--<aop:config>-->
+    <!--<aop:pointcut id="userServicePointCut"-->
+    <!--expression="execution(* com.mkyong.users.service.*Service.*(..))" />-->
+    <!--<aop:advisor advice-ref="txAdvice" pointcut-ref="userServicePointCut" />-->
+    <!--</aop:config>-->
+
+    <context:annotation-config/>
+    <context:component-scan base-package="ru.cinimex.dao"/>
+
+    <bean id="abstractDao" abstract="true" class="ru.cinimex.dao.AHibernateDao">
+        <property name="sessionFactory" ref="sessionFactory"/>
+    </bean>
+
+    <bean id="funnyNameDao" parent="abstractDao" class="ru.cinimex.dao.FunnyNameDao"/>
+</beans>

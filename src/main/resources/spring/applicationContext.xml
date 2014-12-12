@@ -5,7 +5,9 @@
 	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
 	http://www.springframework.org/schema/context
 	http://www.springframework.org/schema/context/spring-context-3.0.xsd">
- 
+
+	<import resource="spring-database.xml"/>
+
 	<context:component-scan base-package="ru.cinimex.rest" />
 	
 	<bean id="transactionBo" class="ru.cinimex.transaction.impl.TransactionBoImpl" />
