@@ -7,12 +7,16 @@
 
     </div>
 
-    Sort by:
-    <select ng-model="orderProp">
-        <option value="code">Alphabetical</option>
-        <option value="modifiedDate">Newest</option>
-    </select>
 
+    <label class="col-md-2">
+        Sort by:
+        <select ng-model="orderProp" >
+            <option value="code">Alphabetical</option>
+            <option value="modifiedDate">Newest</option>
+        </select>
+    </label>
+
+    <button type="button" class="btn btn-success col-md-2" ng-click="open()">Добавить</button>
 
     <table class="table table-striped">
         <tr>
@@ -25,12 +29,12 @@
             <th></th>
         </tr>
         <tr ng-repeat="funnyName in funnyNames | filter:query | orderBy:orderProp">
-            <td><a ng-click="open('lg')"> {{funnyName.id}}</a></td>
-            <td><a ng-click="open('lg')"> {{funnyName.code}}</a></td>
-            <td><a ng-click="open('lg')"> {{funnyName.name}}</a></td>
-            <td><a ng-click="open('lg')"> {{funnyName.enabled}}</a></td>
-            <td><a ng-click="open('lg')"> {{funnyName.modifiedBy}}</a></td>
-            <td><a ng-click="open('lg')"> {{funnyName.modifiedDate}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.id}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.code}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.name}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.enabled}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.modifiedBy}}</a></td>
+            <td><a ng-click="open(funnyName)"> {{funnyName.modifiedDate}}</a></td>
             <td><button type="button" class="btn btn-danger" ng-click="deleteFunnyName(funnyName)">Удалить</button></td>
         </tr>
     </table>

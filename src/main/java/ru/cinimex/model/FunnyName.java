@@ -2,7 +2,7 @@ package ru.cinimex.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by ilapin on 12.12.2014.
@@ -32,7 +32,7 @@ public class FunnyName implements Serializable{
     String modifiedBy;
 
     @Column(name = "MODIFIED_DATE")
-    Timestamp modifiedDate;
+    Date modifiedDate;
 
     public Long getId() {
         return id;
@@ -74,11 +74,11 @@ public class FunnyName implements Serializable{
         this.modifiedBy = modifiedBy;
     }
 
-    public Timestamp getModifiedDate() {
+    public Date getModifiedDate() {
         return modifiedDate;
     }
 
-    public void setModifiedDate(Timestamp modifiedDate) {
+    public void setModifiedDate(Date modifiedDate) {
         this.modifiedDate = modifiedDate;
     }
 }

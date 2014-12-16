@@ -9,10 +9,14 @@ var funnyNamesServices = angular.module('funnyNamesServices', ['ngResource']);
 
 funnyNamesServices.factory('FunnyName', ['$resource',
     function($resource){
-        return $resource('http://localhost:8080/rest/json/funny_names/:funnyNameId', {}, {
-            query: {method:'GET', params:{phoneId:'funny_names'}, isArray:true}
+        return $resource('http://localhost:8080/rest/json/funny_names/:id', {}, {
+            query: {method:'GET', isArray:true}
         });
     }]);
+
+//funnyNamesServices.factory("FunnyName", function($resource) {
+//    return $resource("/rest/json/funny_names/:funnyNameId");
+//});
 
 
 //angular.module('funnyNamesServices', ['ngResource']).

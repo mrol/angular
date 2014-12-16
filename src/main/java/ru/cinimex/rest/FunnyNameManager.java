@@ -5,10 +5,8 @@ import org.springframework.stereotype.Service;
 import ru.cinimex.dao.FunnyNameDao;
 import ru.cinimex.model.FunnyName;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 /**
@@ -36,5 +34,33 @@ public class FunnyNameManager {
     public FunnyName getById(@PathParam("id") long funnyNameId) {
 
         return funnyNameDao.getById(funnyNameId);
+    }
+
+    @DELETE
+    @Path("/{id}")
+    @Consumes("application/json")
+    public Response delete(@PathParam("id") long funnyNameId) {
+        funnyNameDao.deleteById(funnyNameId);
+        String result = "FunnyName with id = " + funnyNameId + " successfully been deleted";
+        return Response.status(200)
+                .header("Content-Type", "application/json; charset=UTF-8")
+                .entity(result).build();
+    }
+
+    @POST
+    @Path("/")
+    @Consumes("application/json")
+    public Response insertOrUpdate(FunnyName funnyName) {
+        try {
+            funnyNameDao.saveOrUpdate(funnyName);
+            return Response.status(200)
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .entity(funnyName).build();
+        } catch (Exception e) {
+            return Response.status(500)
+                    .header("Content-Type", "application/json; charset=UTF-8")
+                    .entity(e).build();
+        }
+
     }
 }

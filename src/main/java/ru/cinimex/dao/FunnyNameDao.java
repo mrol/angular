@@ -27,4 +27,17 @@ public class FunnyNameDao extends AHibernateDao {
         criteria.add(Restrictions.eq("id", id));
         return getByCriteria(criteria);
     }
+
+    public void deleteById(long funnyNameId) {
+        FunnyName funnyName = getById(funnyNameId);
+        if (funnyName != null) {
+            getHibernateTemplate().delete(funnyName);
+        } else {
+            logger.warn("Couldn't delete FunnyName from database, because not found. Requested id: " + funnyNameId);
+        }
+    }
+
+    public void saveOrUpdate(FunnyName funnyName) throws Exception {
+        getHibernateTemplate().saveOrUpdate(funnyName);
+    }
 }
