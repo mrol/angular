@@ -1,6 +1,7 @@
 package ru.cinimex.dao;
 
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import ru.cinimex.model.FunnyName;
 
 import java.util.List;
@@ -19,5 +20,11 @@ public class FunnyNameDao extends AHibernateDao {
     public Integer count() {
         DetachedCriteria criteria = DetachedCriteria.forClass(FunnyName.class);
         return getCountByCriteria(criteria);
+    }
+
+    public FunnyName getById(Long id) {
+        DetachedCriteria criteria = DetachedCriteria.forClass(FunnyName.class);
+        criteria.add(Restrictions.eq("id", id));
+        return getByCriteria(criteria);
     }
 }

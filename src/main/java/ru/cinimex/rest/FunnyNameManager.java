@@ -7,6 +7,7 @@ import ru.cinimex.model.FunnyName;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import java.util.List;
 
@@ -25,7 +26,15 @@ public class FunnyNameManager {
     @GET
     @Path("/")
     @Produces("application/json")
-    public List<FunnyName> getTrackInJSON() {
+    public List<FunnyName> getList() {
         return funnyNameDao.getList();
+    }
+
+    @GET
+    @Path("/{id}")
+    @Produces("application/json")
+    public FunnyName getById(@PathParam("id") long funnyNameId) {
+
+        return funnyNameDao.getById(funnyNameId);
     }
 }
