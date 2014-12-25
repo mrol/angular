@@ -5,7 +5,8 @@ var funnyNamesApp = angular.module('funnyNamesApp', [
     'funnyNamesControllers',
     'ui.bootstrap',
     //'phonecatFilters',
-    'funnyNamesServices'
+    'funnyNamesServices',
+    //'ngMockE2E'
 ]);
 
 funnyNamesApp.config(['$routeProvider',
@@ -24,3 +25,12 @@ funnyNamesApp.config(['$routeProvider',
             });
     }]);
 
+//funnyNamesApp.run(function ($httpBackend) {
+//    $httpBackend.
+//        whenGET(/.*/).
+//        respond(200, {some: 'any'}, {header: 'one'});
+//
+//    //$httpBackend.
+//    //    whenGET(/.*/).
+//    //    passThrough();
+//});

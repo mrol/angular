@@ -1,11 +1,11 @@
 <form role="form" class="modal-body" xmlns="http://www.w3.org/1999/html">
     <div class="clearfix">
         <label for="code">Code</label>
-        <input class="form-control" id="code" placeholder="Enter code" ng-model="funnyName.code">
+        <input class="form-control" id="code" placeholder="Enter code" ng-model="funnyName.code" required="true">
     </div>
     <div class="clearfix">
         <label for="name">Name</label>
-        <input class="form-control" id="name" placeholder="Enter name" ng-model="funnyName.name">
+        <input class="form-control" id="name" placeholder="Enter name" ng-model="funnyName.name" required="true">
     </div>
     <div class="checkbox">
         <label>
@@ -14,7 +14,7 @@
     </div>
     <div class="clearfix">
         <label for="modifiedBy">Modified by</label>
-        <input class="form-control" id="modifiedBy" placeholder="Enter username" ng-model="funnyName.modifiedBy">
+        <input class="form-control" id="modifiedBy" placeholder="Enter username" ng-model="funnyName.modifiedBy" required="true">
     </div>
     <div class="clearfix">
         <label for="datetime">modifiedDate</label>
@@ -25,7 +25,7 @@
                 <input type="text" id="datetime" class="form-control" datepicker-popup="yyyy-MM-dd"
                        ng-model="funnyName.modifiedDate" is-open="opened" datepicker-options="dateOptions"
                        date-disabled="false"
-                       ng-required="true" close-text="Close"/>
+                       required="true" close-text="Close"/>
                 <span class="input-group-btn">
                         <button type="button" class="btn btn-default" ng-click="open($event)"><i
                                 class="glyphicon glyphicon-calendar"></i></button>
