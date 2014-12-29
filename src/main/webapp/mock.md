@@ -65,7 +65,7 @@ myApp
     })
     .config(function ($httpProvider, Config) {
         if (!Config.API.useMocks) return;
- 
+
         //logging requests/responses, adding delay
         $httpProvider.interceptors.push(function ($q, $timeout, Config, $log) {
             return {
@@ -117,48 +117,24 @@ myApp
 
         var Repo = {};
         //mocking data
-        Repo.data = [
-            {
-                "name": "DDRD",
-                "id": id++,
-                "code": "DDRD",
-                "enabled": false,
-                "modifiedDate": 1382700725382,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "DDDК",
-                "id": id++,
-                "code": "DDD",
-                "enabled": true,
-                "modifiedDate": 1383295172493,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "DDR",
-                "id": id++,
-                "code": "DDR",
-                "enabled": false,
-                "modifiedDate": 1382700715130,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "Re2",
-                "id": id++,
-                "code": "Reee",
-                "enabled": true,
-                "modifiedDate": 1383295182565,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "FF",
-                "id": id++,
-                "code": "FF",
-                "enabled": true,
-                "modifiedDate": 1602406800000,
-                "modifiedBy": "sv"
-            }
-        ];
+                Repo.data = [
+                    {
+                        "name": "DDRD",
+                        "id": id++,
+                        "code": "DDRD",
+                        "enabled": false,
+                        "modifiedDate": 1382700725382,
+                        "modifiedBy": "sv123"
+                    },
+                    {
+                        "name": "DDDК",
+                        "id": id++,
+                        "code": "DDD",
+                        "enabled": true,
+                        "modifiedDate": 1383295172493,
+                        "modifiedBy": "sv123"
+                    }
+                ];
         Repo.index = {};
 
         angular.forEach(Repo.data, function (item, key) {
@@ -186,7 +162,7 @@ myApp
             return [200, Tag, {/*headers*/}];
         });
 
-        //POST tag/
+        //POST add/update
         $httpBackend.whenPOST(Config.API.path).respond(function (method, url, data, headers) {
             $log.log('Intercepted POST to tag', data);
             var Tag = angular.fromJson(data);

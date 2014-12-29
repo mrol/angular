@@ -76,7 +76,7 @@ funnyNamesApp
     })
     .constant('regexEscape', function regEsc(str) {
         //Escape string to be able to use it in a regular expression
-        return str.replace(/[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+        return str.replace(/[\-\[\]\/\{}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
     })
     //mocking http service
     .run(function (Config, $httpBackend, $log, APIBase, $timeout, regexEscape) {
@@ -110,30 +110,6 @@ funnyNamesApp
                 "enabled": true,
                 "modifiedDate": 1383295172493,
                 "modifiedBy": "sv123"
-            },
-            {
-                "name": "DDR",
-                "id": id++,
-                "code": "DDR",
-                "enabled": false,
-                "modifiedDate": 1382700715130,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "Re2",
-                "id": id++,
-                "code": "Reee",
-                "enabled": true,
-                "modifiedDate": 1383295182565,
-                "modifiedBy": "sv123"
-            },
-            {
-                "name": "FF",
-                "id": id++,
-                "code": "FF",
-                "enabled": true,
-                "modifiedDate": 1602406800000,
-                "modifiedBy": "sv"
             }
         ];
         Repo.index = {};
@@ -163,7 +139,7 @@ funnyNamesApp
             return [200, Tag, {/*headers*/}];
         });
 
-        //POST tag/
+        //POST add/update
         $httpBackend.whenPOST(Config.API.path).respond(function (method, url, data, headers) {
             $log.log('Intercepted POST to tag', data);
             var Tag = angular.fromJson(data);
