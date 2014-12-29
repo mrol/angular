@@ -59,7 +59,7 @@ python -m http.server 8000
 
 Какие запросы умеет:
 <ol>
-  <li>GET по адресу `Config.API.path + /`. Возвращает все элементы из Repo.data</li>
+  <li>GET по адресу `Config.API.path`. Возвращает все элементы из Repo.data</li>
   <li>GET по адресу `Config.API.path + /id`. Возвращает элемент c заданным id из Repo.data</li>
   <li>POST по адресу `Config.API.path`. Обновляет/добавляет элемент в Repo.data</li>
   <li>DELETE по адресу `Config.API.path + /id`. Удаляет элемент c заданным id из Repo.data</li>
