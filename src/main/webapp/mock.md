@@ -65,7 +65,7 @@ myApp
     })
     .config(function ($httpProvider, Config) {
         if (!Config.API.useMocks) return;
-
+ 
         //logging requests/responses, adding delay
         $httpProvider.interceptors.push(function ($q, $timeout, Config, $log) {
             return {
